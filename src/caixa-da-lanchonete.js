@@ -4,12 +4,12 @@ class CaixaDaLanchonete {
     menu = {
         "cafe": {description: 'Café', price: 3.00},
         "chantily": {description: 'Chantily (extra do café)', price: 1.50},
-        "suco": {description: 'Café', price: 6.20},
-        "sanduiche": {description: 'Café', price: 6.50},
-        "queijo": {description: 'Café', price: 2.00},
-        "salgado": {description: 'Café', price: 7.25},
-        "combo1": {description: 'Café', price: 9.25},
-        "combo2": {description: 'Café', price: 7.50},
+        "suco": {description: 'Suco Natural', price: 6.20},
+        "sanduiche": {description: 'Sanduíche', price: 6.50},
+        "queijo": {description: 'Queijo (extra do Sanduíche)', price: 2.00},
+        "salgado": {description: 'Salgado', price: 7.25},
+        "combo1": {description: '1 Suco e 1 Sanduíche', price: 9.25},
+        "combo2": {description: '1 Café e 1 Sanduíche', price: 7.50},
     }
 
     //TAXA OU DESCONTO
@@ -34,11 +34,14 @@ class CaixaDaLanchonete {
 
     calcularTotalDeItens(itens) {
         let itensPrice = 0;
+        //let pedidoPrincipal = 0;
         
         for (let index = 0; index < itens.length; index++) {
             const item = itens[index];
             const itemName = item.split(",")[0];
             const quantity = item.split(",")[1];
+
+            if(quantity < 1) {return 'Quantidade inválida!';}
                         
             if(itemName in this.menu){
                 itensPrice += (this.menu[itemName].price * quantity);
